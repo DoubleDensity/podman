@@ -184,6 +184,8 @@ RUN set -eux; \
 	ln -s /usr/local/bin/podman /usr/bin/docker; \
 	mkdir -pm 775 /etc/containers /podman/.config/containers /etc/cni/net.d /podman/.local/share/containers/storage/libpod; \
 	chown -R root:podman /podman; \
+	wget -O /etc/containers/registries.conf https://raw.githubusercontent.com/projectatomic/registries/master/registries.conf; \
+	wget -O /etc/containers/policy.json     https://raw.githubusercontent.com/containers/skopeo/master/default-policy.json; \
 	wget -O /etc/cni/net.d/99-bridge.conflist https://raw.githubusercontent.com/containers/libpod/master/cni/87-podman-bridge.conflist; \
 	podman --help >/dev/null
 COPY entrypoint.sh /
